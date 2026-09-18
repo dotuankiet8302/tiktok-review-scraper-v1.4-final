@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "TikTok Shop Review & Image Scraper",
+  "version": "1.5.0",
+  "description": "Quét bình luận TikTok Shop, xuất DOC/CSV/JSON và tải ảnh vào thư mục theo tên sản phẩm.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "downloads",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://shop.tiktok.com/*",
+    "https://*.ibyteimg.com/*",
+    "https://*.byteimg.com/*",
+    "https://*.tiktokcdn.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "TikTok Review Scraper",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://shop.tiktok.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

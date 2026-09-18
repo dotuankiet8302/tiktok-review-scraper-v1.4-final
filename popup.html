@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TikTok Review Scraper</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <h1>TikTok Review Scraper</h1>
+        <p>Quét bình luận, xuất dữ liệu và tải ảnh đánh giá theo từng sản phẩm.</p>
+      </div>
+      <span id="statusBadge" class="badge idle">Sẵn sàng</span>
+    </header>
+
+    <section class="stats" aria-label="Thống kê">
+      <div><strong id="reviewCount">0</strong><span>Bình luận</span></div>
+      <div><strong id="imageCount">0</strong><span>Ảnh</span></div>
+      <div><strong id="roundCount">0</strong><span>Vòng quét</span></div>
+    </section>
+
+    <section class="progress-card">
+      <div class="progress-row">
+        <span id="phaseText">Chưa bắt đầu</span>
+        <span id="progressText">0%</span>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      <p id="detailText" class="detail">Mở một trang sản phẩm TikTok Shop rồi nhấn "Bắt đầu quét".</p>
+      <p id="downloadText" class="detail muted"></p>
+    </section>
+
+    <section class="options">
+      <label class="product-option" for="productName">
+        <span>
+          <strong>Tên thư mục sản phẩm</strong>
+          <small>Tự nhận diện, có thể sửa lại trước khi xuất</small>
+        </span>
+        <input id="productName" type="text" maxlength="60" placeholder="Tự nhận diện từ trang">
+      </label>
+
+      <label class="limit-option" for="maxReviews">
+        <span>
+          <strong>Số bình luận muốn quét</strong>
+          <small>Từ 1 đến 5000</small>
+        </span>
+        <input id="maxReviews" type="number" min="1" max="5000" step="1" value="50" inputmode="numeric">
+      </label>
+
+      <div class="toggles">
+        <label><input id="tryViewMore" type="checkbox" checked> Tự bấm "Xem thêm"</label>
+        <label><input id="autoScroll" type="checkbox" checked> Tự cuộn để tìm thêm</label>
+        <label title="Mở từng khung ảnh lớn để lấy các ảnh ẩn sau badge +N. Quét chậm hơn nhiều.">
+          <input id="deepImages" type="checkbox"> Quét đầy đủ ảnh (chậm hơn)
+        </label>
+      </div>
+    </section>
+
+    <section class="actions primary-actions">
+      <button id="startBtn" class="primary">Bắt đầu quét</button>
+      <button id="stopBtn" class="danger" disabled>Dừng</button>
+    </section>
+
+    <section class="actions export-actions">
+      <button id="docxBtn" disabled>DOCX</button>
+      <button id="docBtn" disabled>HTML</button>
+      <button id="csvBtn" disabled>CSV</button>
+      <button id="jsonBtn" disabled>JSON</button>
+      <button id="imagesBtn" disabled>Ảnh ZIP</button>
+    </section>
+
+    <section class="filters">
+      <input id="searchInput" type="search" placeholder="Lọc theo nội dung, ngày, phân loại">
+      <select id="ratingFilter">
+        <option value="all">Mọi sao</option>
+        <option value="5">5 sao</option>
+        <option value="4">4 sao</option>
+        <option value="3">3 sao</option>
+        <option value="2">2 sao</option>
+        <option value="1">1 sao</option>
+      </select>
+      <label><input id="hasImageFilter" type="checkbox"> Có ảnh</label>
+    </section>
+
+    <section class="preview">
+      <div class="section-title">
+        <h2>Kết quả gần nhất</h2>
+        <button id="clearBtn" class="link-btn">Xóa dữ liệu</button>
+      </div>
+      <div id="resultList" class="result-list">
+        <p class="empty">Chưa có dữ liệu.</p>
+      </div>
+    </section>
+
+    <footer>
+      Dữ liệu được lưu tạm trong trình duyệt. File xuất và ảnh nằm trong Downloads theo thư mục sản phẩm.
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
